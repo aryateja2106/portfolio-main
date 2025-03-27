@@ -1,0 +1,202 @@
+{
+    "blogPosts": [
+      {
+        "id": "1",
+        "slug": "getting-started-with-nextjs",
+        "title": "Getting Started with Next.js",
+        "description": "Learn how to build modern web applications with Next.js and React",
+        "excerpt": "Next.js has revolutionized the way developers build React applications. With its powerful features like server-side rendering, static site generation, and built-in routing, it provides an excellent foundation for creating modern web applications.",
+        "date": "2025-03-15",
+        "formattedDate": "March 15, 2025",
+        "readTime": "5 min read",
+        "category": "Web Development",
+        "tags": ["nextjs", "react", "javascript", "frontend"],
+        "coverImage": "/images/blog-1.jpg",
+        "author": {
+          "id": "1",
+          "name": "Alex Thompson",
+          "avatar": "/images/avatar.jpg",
+          "bio": "Full Stack Developer & Technical Writer",
+          "twitter": "@alexthompson"
+        },
+        "relatedArticles": ["2", "3", "5"],
+        "content": "Next.js has revolutionized the way developers build React applications. With its powerful features like server-side rendering, static site generation, and built-in routing, it provides an excellent foundation for creating modern web applications.\n\n## Why Choose Next.js?\n\nThere are several reasons why Next.js has become the go-to framework for React development:\n\n- **Zero Configuration:** Next.js works out of the box with sensible defaults but is fully customizable.\n- **Hybrid Rendering:** Choose between static generation and server-side rendering on a per-page basis.\n- **Built-in Routing:** File-system based routing makes creating pages and routes simple.\n- **Automatic Code Splitting:** Improves performance by only loading the JavaScript needed for each page.\n- **API Routes:** Easily create API endpoints as part of your Next.js application.\n\n## Getting Started\n\nLet's create a simple Next.js application to see how easy it is to get started:\n\n```\nnpx create-next-app@latest my-next-app\ncd my-next-app\nnpm run dev\n```\n\nThis creates a new Next.js project and starts a development server at `localhost:3000`. You can now open this URL in your browser to see your application running.\n\n## Creating Pages\n\nIn Next.js, pages are React components exported from files in the `pages` directory. Each page is associated with a route based on its filename.\n\nFor example, to create a page at the route `/about`, you would create a file at `pages/about.js`:\n\n```jsx\n// pages/about.js\nexport default function About() {\n  return (\n    <div>\n      <h1>About Us</h1>\n      <p>This is the about page of our Next.js application.</p>\n    </div>\n  )\n}\n```\n\n## Conclusion\n\nNext.js provides a powerful and flexible framework for building React applications. With its extensive features and great developer experience, it's no wonder it has become so popular in the React ecosystem."
+      },
+      {
+        "id": "2",
+        "slug": "mastering-tailwind-css",
+        "title": "Mastering Tailwind CSS",
+        "description": "A comprehensive guide to using Tailwind CSS for creating beautiful user interfaces",
+        "excerpt": "Tailwind CSS has changed the way developers approach styling in web applications. This utility-first CSS framework provides low-level utility classes that let you build completely custom designs without ever leaving your HTML.",
+        "date": "2025-03-10",
+        "formattedDate": "March 10, 2025",
+        "readTime": "8 min read",
+        "category": "CSS",
+        "tags": ["css", "tailwind", "frontend", "design"],
+        "coverImage": "/images/blog-2.jpg",
+        "author": {
+          "id": "1",
+          "name": "Alex Thompson",
+          "avatar": "/images/avatar.jpg",
+          "bio": "Full Stack Developer & Technical Writer",
+          "twitter": "@alexthompson"
+        },
+        "relatedArticles": ["1", "4", "5"],
+        "content": "Tailwind CSS has changed the way developers approach styling in web applications. This utility-first CSS framework provides low-level utility classes that let you build completely custom designs without ever leaving your HTML.\n\n## Why Tailwind CSS?\n\nTraditional CSS frameworks like Bootstrap provide pre-designed components that make it quick to build websites, but often result in similar-looking designs. Tailwind takes a different approach:\n\n- **Utility-First:** Building complex components from atomic utility classes\n- **Responsive Design:** Built-in responsive modifiers make it easy to build responsive interfaces\n- **Customization:** Tailwind is highly customizable through its configuration file\n- **Performance:** Only the utilities you use are generated in your final CSS\n\n## Getting Started with Tailwind\n\nLet's set up Tailwind CSS in a new project:\n\n```\nnpm init -y\nnpm install tailwindcss postcss autoprefixer\nnpx tailwindcss init -p\n```\n\nConfigure your template paths in `tailwind.config.js`:\n\n```js\nmodule.exports = {\n  content: ['./src/**/*.{html,js}'],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n}\n```\n\n## Building Components with Tailwind\n\nHere's how you can create a simple card component using Tailwind's utility classes:\n\n```html\n<div class=\"max-w-sm rounded overflow-hidden shadow-lg\">\n  <img class=\"w-full\" src=\"/img/card-image.jpg\" alt=\"Card image\">\n  <div class=\"px-6 py-4\">\n    <div class=\"font-bold text-xl mb-2\">Card Title</div>\n    <p class=\"text-gray-700 text-base\">\n      Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n    </p>\n  </div>\n</div>\n```\n\n## Conclusion\n\nTailwind CSS provides a powerful and flexible approach to styling web applications. While it may seem verbose at first, the productivity gains and design flexibility make it worth the initial learning curve."
+      },
+      {
+        "id": "3",
+        "slug": "react-server-components-explained",
+        "title": "React Server Components Explained",
+        "description": "Understanding the new paradigm of server components in React applications",
+        "excerpt": "React Server Components represent a paradigm shift in how we build React applications. They allow developers to render components on the server, reducing bundle sizes and improving performance.",
+        "date": "2025-03-05",
+        "formattedDate": "March 5, 2025",
+        "readTime": "6 min read",
+        "category": "React",
+        "tags": ["react", "server-components", "nextjs", "performance"],
+        "coverImage": "/images/blog-3.jpg",
+        "author": {
+          "id": "2",
+          "name": "Sarah Johnson",
+          "avatar": "/images/avatar-sarah.jpg",
+          "bio": "React Developer & Open Source Contributor",
+          "twitter": "@sarahjdev"
+        },
+        "relatedArticles": ["1", "5", "4"],
+        "content": "React Server Components represent a paradigm shift in how we build React applications. They allow developers to render components on the server, reducing bundle sizes and improving performance.\n\n## What Are Server Components?\n\nServer Components are a new type of React component that only runs on the server. They allow you to:\n\n- Access server-side data sources directly, like databases or file systems\n- Keep large dependencies on the server, reducing client bundle size\n- Automatically split the client and server code\n\n## Server vs. Client Components\n\nUnderstanding the difference between server and client components is crucial:\n\n```jsx\n// This is a Server Component\n// It can access databases directly but can't use hooks or browser APIs\nexport default async function ServerComponent() {\n  const data = await fetchFromDatabase();\n  return <div>{data.title}</div>;\n}\n\n// This is a Client Component\n// It can use hooks and browser APIs but can't access server resources directly\n'use client';\n\nimport { useState } from 'react';\n\nexport default function ClientComponent() {\n  const [count, setCount] = useState(0);\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Count: {count}\n    </button>\n  );\n}\n```\n\n## Benefits of Server Components\n\nServer Components offer several significant advantages:\n\n- **Reduced Bundle Size:** Server-only code isn't included in the JavaScript sent to the client\n- **Direct Access to Backend Resources:** No need for API layers in many cases\n- **Improved Loading Performance:** Initial page loads can be faster\n- **Automatic Code Splitting:** Client components are automatically code-split\n\n## Conclusion\n\nReact Server Components represent an exciting evolution in React's capabilities, especially when combined with frameworks like Next.js. While they require a mental model shift, the performance and developer experience benefits make them worth exploring for modern applications."
+      },
+      {
+        "id": "4",
+        "slug": "building-a-personal-portfolio",
+        "title": "Building a Personal Portfolio",
+        "description": "Step-by-step guide to creating an impressive developer portfolio website",
+        "excerpt": "A strong portfolio website is essential for developers looking to showcase their skills and attract potential employers or clients. Learn how to build a portfolio that stands out.",
+        "date": "2025-02-28",
+        "formattedDate": "February 28, 2025",
+        "readTime": "7 min read",
+        "category": "Career",
+        "tags": ["portfolio", "career", "web-development", "personal-branding"],
+        "coverImage": "/images/blog-4.jpg",
+        "author": {
+          "id": "1",
+          "name": "Alex Thompson",
+          "avatar": "/images/avatar.jpg",
+          "bio": "Full Stack Developer & Technical Writer",
+          "twitter": "@alexthompson"
+        },
+        "relatedArticles": ["5", "1", "2"],
+        "content": "A strong portfolio website is essential for developers looking to showcase their skills and attract potential employers or clients. In this guide, we'll walk through the process of creating an effective developer portfolio.\n\n## Planning Your Portfolio\n\nBefore diving into code, take time to plan your portfolio's structure and content:\n\n- **Target Audience:** Are you targeting employers, clients, or both?\n- **Key Projects:** Select 3-5 projects that demonstrate your range of skills\n- **Personal Brand:** Define your unique value proposition as a developer\n- **Design Aesthetic:** Choose a style that reflects your personality while remaining professional\n\n## Essential Portfolio Sections\n\nA complete portfolio typically includes these key sections:\n\n1. **Hero Section:** Your name, title, and a brief introduction\n2. **About:** Your background, skills, and what drives you as a developer\n3. **Projects:** Showcase your best work with descriptions and links\n4. **Skills:** Technologies and methodologies you're proficient in\n5. **Contact:** How potential employers or clients can reach you\n\n## Building Your Portfolio\n\nHere's a simple Next.js and Tailwind CSS setup to get started:\n\n```\nnpx create-next-app portfolio --typescript\ncd portfolio\nnpm install -D tailwindcss postcss autoprefixer\nnpx tailwindcss init -p\n```\n\nFor the hero section, you might use something like:\n\n```jsx\nexport default function Hero() {\n  return (\n    <section className=\"flex flex-col items-center justify-center min-h-screen text-center p-4\">\n      <h1 className=\"text-4xl md:text-6xl font-bold mb-4\">\n        Hi, I'm <span className=\"text-blue-600\">Your Name</span>\n      </h1>\n      <h2 className=\"text-2xl md:text-3xl mb-6\">\n        Full Stack Developer\n      </h2>\n      <p className=\"max-w-md text-lg text-gray-600 dark:text-gray-400 mb-8\">\n        I build accessible, user-friendly web applications with modern technologies.\n      </p>\n      <div className=\"flex gap-4\">\n        <a href=\"#projects\" className=\"px-6 py-3 bg-blue-600 text-white rounded-lg\">\n          See My Work\n        </a>\n        <a href=\"#contact\" className=\"px-6 py-3 border border-blue-600 text-blue-600 rounded-lg\">\n          Contact Me\n        </a>\n      </div>\n    </section>\n  );\n}\n```\n\n## Conclusion\n\nA well-crafted portfolio is one of the most valuable assets in your job search or freelance career. Take the time to make it representative of your skills and personality, and keep it updated as you complete new projects."
+      },
+      {
+        "id": "5",
+        "slug": "typescript-best-practices",
+        "title": "TypeScript Best Practices for 2025",
+        "description": "Learn the most effective TypeScript patterns and practices for modern web development",
+        "excerpt": "TypeScript has become the standard for large-scale JavaScript applications. This article covers the latest best practices, patterns, and features that will make your TypeScript code more robust and maintainable.",
+        "date": "2025-02-20",
+        "formattedDate": "February 20, 2025",
+        "readTime": "9 min read",
+        "category": "TypeScript",
+        "tags": ["typescript", "javascript", "web-development", "best-practices"],
+        "coverImage": "/images/blog-5.jpg",
+        "author": {
+          "id": "2",
+          "name": "Sarah Johnson",
+          "avatar": "/images/avatar-sarah.jpg",
+          "bio": "React Developer & Open Source Contributor",
+          "twitter": "@sarahjdev"
+        },
+        "relatedArticles": ["1", "2", "3"],
+        "content": "TypeScript has become the standard for large-scale JavaScript applications. This article covers the latest best practices, patterns, and features that will make your TypeScript code more robust and maintainable.\n\n## Type Safety Beyond the Basics\n\nWhile basic TypeScript usage is straightforward, achieving true type safety requires deeper understanding:\n\n- **Discriminated Unions:** Use tagged union types for more precise type narrowing\n- **Generic Constraints:** Restrict generic types to those with specific properties\n- **The `satisfies` Operator:** Verify types without changing the inferred type\n- **Template Literal Types:** Create powerful string manipulation at the type level\n\n## Example: Discriminated Unions\n\n```typescript\n// Instead of this\ntype Shape = {\n  kind?: 'circle' | 'square';\n  radius?: number;\n  sideLength?: number;\n};\n\n// Do this\ntype Circle = {\n  kind: 'circle';\n  radius: number;\n};\n\ntype Square = {\n  kind: 'square';\n  sideLength: number;\n};\n\ntype Shape = Circle | Square;\n\nfunction getArea(shape: Shape) {\n  // TypeScript knows which properties exist based on the 'kind'\n  if (shape.kind === 'circle') {\n    return Math.PI * shape.radius ** 2;\n  } else {\n    return shape.sideLength ** 2;\n  }\n}\n```\n\n## Performance Optimizations\n\nAs TypeScript projects grow, compilation time can become an issue. Here are strategies to improve performance:\n\n- **Project References:** Split large projects into smaller, interconnected projects\n- **Type-Only Imports/Exports:** Use `import type` to avoid importing runtime code\n- **Skip Type Checking:** Use `// @ts-nocheck` sparingly for problematic files\n- **Optimize tsconfig.json:** Configure `incremental` and `skipLibCheck` options\n\n## Modern TypeScript Patterns\n\n### The Builder Pattern with Method Chaining\n\n```typescript\nclass QueryBuilder<T> {\n  private filters: Record<string, any> = {};\n  private sorts: Record<string, 'asc' | 'desc'> = {};\n  private limitValue: number | null = null;\n  \n  where<K extends keyof T>(key: K, value: T[K]): this {\n    this.filters[key as string] = value;\n    return this;\n  }\n  \n  orderBy<K extends keyof T>(key: K, direction: 'asc' | 'desc'): this {\n    this.sorts[key as string] = direction;\n    return this;\n  }\n  \n  limit(value: number): this {\n    this.limitValue = value;\n    return this;\n  }\n  \n  async execute(): Promise<T[]> {\n    // Implementation would go here\n    return [] as T[];\n  }\n}\n\n// Usage\ninterface User {\n  id: number;\n  name: string;\n  email: string;\n  createdAt: Date;\n}\n\nconst users = await new QueryBuilder<User>()\n  .where('name', 'John')\n  .orderBy('createdAt', 'desc')\n  .limit(10)\n  .execute();\n```\n\n## Conclusion\n\nTypeScript continues to evolve with each release, providing more powerful tools for type-safe programming. By adopting these best practices, you'll write more maintainable code and catch errors before they reach production."
+      },
+      {
+        "id": "6",
+        "slug": "building-with-llms",
+        "title": "Building Applications with Large Language Models",
+        "description": "A practical guide to integrating LLMs into your applications",
+        "excerpt": "Large Language Models have revolutionized AI capabilities. Learn how to effectively integrate these powerful models into your applications to create intelligent, responsive user experiences.",
+        "date": "2025-02-15",
+        "formattedDate": "February 15, 2025",
+        "readTime": "10 min read",
+        "category": "AI",
+        "tags": ["ai", "llm", "machine-learning", "development"],
+        "coverImage": "/images/blog-6.jpg",
+        "author": {
+          "id": "3",
+          "name": "Michael Chen",
+          "avatar": "/images/avatar-michael.jpg",
+          "bio": "AI Researcher & Full Stack Developer",
+          "twitter": "@michaelaidev"
+        },
+        "relatedArticles": ["7", "3", "5"],
+        "content": "Large Language Models have revolutionized AI capabilities. This guide explores practical approaches to integrating these powerful models into your applications to create intelligent, responsive user experiences."
+      },
+      {
+        "id": "7",
+        "slug": "modern-state-management",
+        "title": "Modern State Management in React Applications",
+        "description": "Comparing approaches to state management in 2025",
+        "excerpt": "State management continues to evolve in the React ecosystem. This article compares modern approaches from context and reducers to libraries like Zustand, Jotai, and TanStack Query.",
+        "date": "2025-02-10",
+        "formattedDate": "February 10, 2025",
+        "readTime": "8 min read",
+        "category": "React",
+        "tags": ["react", "state-management", "javascript", "frontend"],
+        "coverImage": "/images/blog-7.jpg",
+        "author": {
+          "id": "2",
+          "name": "Sarah Johnson",
+          "avatar": "/images/avatar-sarah.jpg",
+          "bio": "React Developer & Open Source Contributor",
+          "twitter": "@sarahjdev"
+        },
+        "relatedArticles": ["1", "3", "6"],
+        "content": "State management continues to evolve in the React ecosystem. This article compares modern approaches from context and reducers to libraries like Zustand, Jotai, and TanStack Query."
+      },
+      {
+        "id": "8",
+        "slug": "web-performance-optimization",
+        "title": "Web Performance Optimization Techniques",
+        "description": "Strategies to create lightning-fast web experiences",
+        "excerpt": "Performance is a critical aspect of user experience. Learn practical techniques to optimize your web applications for speed, from code splitting to image optimization and caching strategies.",
+        "date": "2025-02-05",
+        "formattedDate": "February 5, 2025",
+        "readTime": "7 min read",
+        "category": "Performance",
+        "tags": ["performance", "web-development", "optimization", "user-experience"],
+        "coverImage": "/images/blog-8.jpg",
+        "author": {
+          "id": "1",
+          "name": "Alex Thompson",
+          "avatar": "/images/avatar.jpg",
+          "bio": "Full Stack Developer & Technical Writer",
+          "twitter": "@alexthompson"
+        },
+        "relatedArticles": ["4", "2", "9"],
+        "content": "Performance is a critical aspect of user experience. This article explores practical techniques to optimize your web applications for speed, from code splitting to image optimization and caching strategies."
+      },
+      {
+        "id": "9",
+        "slug": "serverless-architecture",
+        "title": "Serverless Architecture for Modern Applications",
+        "description": "Building scalable applications with serverless technologies",
+        "excerpt": "Serverless computing has transformed how we build and deploy applications. Discover how to leverage serverless technologies to create scalable, cost-effective solutions with minimal infrastructure management.",
+        "date": "2025-01-30",
+        "formattedDate": "January 30, 2025",
+        "readTime": "9 min read",
+        "category": "Cloud",
+        "tags": ["serverless", "cloud", "aws", "architecture"],
+        "coverImage": "/images/blog-9.jpg",
+        "author": {
+          "id": "3",
+          "name": "Michael Chen",
+          "avatar": "/images/avatar-michael.jpg",
+          "bio": "AI Researcher & Full Stack Developer",
+          "twitter": "@michaelaidev"
+        },
+        "relatedArticles": ["6", "1", "8"],
+        "content": "Serverless computing has transformed how we build and deploy applications. This article explores how to leverage serverless technologies to create scalable, cost-effective solutions with minimal infrastructure management."
+      }
+    ]
+  }
