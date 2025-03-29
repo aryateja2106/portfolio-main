@@ -145,11 +145,17 @@ export function CommandPalette({
       if (e.key === 'Escape') {
         setIsOpen(false)
       }
+      
+      // Toggle command palette on Cmd+K/Ctrl+K
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setIsOpen(!isOpen)
+      }
     }
     
     document.addEventListener('keydown', down)
     return () => document.removeEventListener('keydown', down)
-  }, [setIsOpen])
+  }, [setIsOpen, isOpen])
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -267,13 +273,13 @@ export function MobileMenu() {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
-        setIsCommandPaletteOpen(true)
+        setIsCommandPaletteOpen(!isCommandPaletteOpen)
       }
     }
     
     document.addEventListener('keydown', down)
     return () => document.removeEventListener('keydown', down)
-  }, [])
+  }, [isCommandPaletteOpen])
 
   return (
     <>
