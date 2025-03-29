@@ -137,7 +137,7 @@ export const About = () => {
           {/* Intro Card */}
           <div className="animate-card opacity-0 transition-all duration-500 ease-out transform translate-y-8 bg-neutral-800/50 backdrop-blur-md rounded-xl p-8 border-l-4 border-l-teal-400 shadow-lg mb-16 relative z-10">
             <p className="text-lg text-center text-neutral-300">
-              Late 2022, I found myself captivated by ChatGPT's capabilities. What began as curiosity quickly transformed into a realization that my business background provided a unique advantage in the AI landscape—the ability to bridge technical possibilities with practical business applications.
+              Late 2022, I found myself captivated by ChatGPT&apos;s capabilities. What began as curiosity quickly transformed into a realization that my business background provided a unique advantage in the AI landscape—the ability to bridge technical possibilities with practical business applications.
             </p>
           </div>
           
@@ -148,7 +148,7 @@ export const About = () => {
               <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
                 <div className="text-3xl text-teal-400 mb-4 text-center">✨</div>
                 <p className="text-neutral-300">
-                  That evening in 2022 changed everything. Testing ChatGPT's limits, I witnessed something revolutionary—a system that mirrored human intuition with uncanny consistency. It wasn't just another algorithm; it represented a fundamental shift in what technology could achieve.
+                  That evening in 2022 changed everything. Testing ChatGPT&apos;s limits, I witnessed something revolutionary—a system that mirrored human intuition with uncanny consistency. It wasn&apos;t just another algorithm; it represented a fundamental shift in what technology could achieve.
                 </p>
               </div>
             </div>
@@ -159,7 +159,7 @@ export const About = () => {
               <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
                 <div className="text-3xl text-teal-400 mb-4 text-center">🧠</div>
                 <p className="text-neutral-300">
-                  For years I'd wondered how our minds transform random thoughts into coherent decisions. Now I was witnessing a mathematical model that offered glimpses into our own cognitive processes, making me feel like we were beginning to understand the mechanics of thought itself.
+                  For years I&apos;d wondered how our minds transform random thoughts into coherent decisions. Now I was witnessing a mathematical model that offered glimpses into our own cognitive processes, making me feel like we were beginning to understand the mechanics of thought itself.
                 </p>
               </div>
             </div>
@@ -181,7 +181,7 @@ export const About = () => {
               <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
                 <div className="text-3xl text-teal-400 mb-4 text-center">🚀</div>
                 <p className="text-neutral-300">
-                  What started as curiosity evolved into obsession. I realized my business background wasn't a disadvantage—it was exactly what was needed: someone who could bridge technical capabilities with practical applications, translating AI potential into business value.
+                  What started as curiosity evolved into obsession. I realized my business background wasn&apos;t a disadvantage—it was exactly what was needed: someone who could bridge technical capabilities with practical applications, translating AI potential into business value.
                 </p>
               </div>
             </div>
