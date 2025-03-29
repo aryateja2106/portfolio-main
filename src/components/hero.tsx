@@ -25,10 +25,11 @@ export function Hero() {
           <span className="flex w-full items-center justify-center text-center text-2xl text-neutral-400 md:min-h-fit md:justify-start md:text-left md:text-3xl">
             <Typewriter
               words={[
-                  'AI Engineer',
-                  'LLM Enthusiast',
-                  'Automation Specialist',
-                  'Full stack developer'
+                  'Aspiring AI Engineer',
+                  'AI Research Enthusiast',
+                  'From Business to Binary',
+                  'Multi-Agent Systems Builder',
+                  'AI Solutions Architect'
                 ]}
               loop
             />

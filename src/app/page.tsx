@@ -1,4 +1,6 @@
 
+'use client';
+
 import { ExploreButton } from "@/components/explore-button";
 import { Hero } from "@/components/hero";
 import { About } from "@/components/about";

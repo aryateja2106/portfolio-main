@@ -1,113 +1,231 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 export const About = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Intersection Observer for animation
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    // Observe all cards
+    const cards = document.querySelectorAll('.animate-card');
+    for (const card of cards) {
+      observer.observe(card);
+    }
+
+    // Draw connecting line animation when component mounts
+    const container = containerRef.current;
+    if (container) {
+      drawConnectingLines();
+    }
+
+    // Redraw lines on window resize
+    window.addEventListener('resize', drawConnectingLines);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', drawConnectingLines);
+    };
+  }, []);
+
+  // Function to draw animated connecting lines between cards
+  const drawConnectingLines = () => {
+    const cards = document.querySelectorAll('.card-content');
+    if (cards.length < 2) return;
+
+    // Remove any existing SVG
+    const existingSvg = document.getElementById('connecting-lines');
+    if (existingSvg) {
+      existingSvg.remove();
+    }
+
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const containerRect = container.getBoundingClientRect();
+    
+    // Create SVG element positioned behind the cards
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('id', 'connecting-lines');
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.zIndex = '0';
+    svg.style.pointerEvents = 'none';
+    
+    // Insert SVG as first child so it's behind the cards
+    container.insertBefore(svg, container.firstChild);
+    
+    // Connect cards with lines
+    for (let i = 0; i < cards.length - 1; i++) {
+      const currentCard = cards[i];
+      const nextCard = cards[i + 1];
+      
+      const currentRect = currentCard.getBoundingClientRect();
+      const nextRect = nextCard.getBoundingClientRect();
+      
+      // Calculate relative positions to the container
+      const startX = (currentRect.left + currentRect.right) / 2 - containerRect.left;
+      const startY = currentRect.bottom - containerRect.top;
+      const endX = (nextRect.left + nextRect.right) / 2 - containerRect.left;
+      const endY = nextRect.top - containerRect.top;
+      
+      // Create dashed path
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      
+      // Create a path that curves between the cards
+      const curveControl = (startY + endY) / 2;
+      const pathData = `M ${startX},${startY} C ${startX},${curveControl} ${endX},${curveControl} ${endX},${endY}`;
+      
+      path.setAttribute('d', pathData);
+      path.setAttribute('stroke', '#2dd4bf');
+      path.setAttribute('stroke-width', '2');
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke-dasharray', '5,5');
+      
+      // Add animation for dashed line
+      const animateElement = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateElement.setAttribute('attributeName', 'stroke-dashoffset');
+      animateElement.setAttribute('from', '100');
+      animateElement.setAttribute('to', '0');
+      animateElement.setAttribute('dur', '15s');
+      animateElement.setAttribute('repeatCount', 'indefinite');
+      
+      path.appendChild(animateElement);
+      svg.appendChild(path);
+      
+      // Add moving dots along the path
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('r', '4');
+      circle.setAttribute('fill', '#2dd4bf');
+      
+      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+      animateMotion.setAttribute('path', pathData);
+      animateMotion.setAttribute('dur', `${3 + i}s`);
+      animateMotion.setAttribute('repeatCount', 'indefinite');
+      
+      circle.appendChild(animateMotion);
+      svg.appendChild(circle);
+    }
+  };
+
   return (
-    <section id="about" className="w-full">
-      <h1 className="text-5xl font-bold leading-tight tracking-wider mb-14">
-        I TRANSFORM IDEAS INTO <br /> INTELLIGENT SOLUTIONS
-      </h1>
-
-      <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-        {/* Left column - About text */}
-        <div className="flex-1 space-y-8">
-          <p className="text-lg">
-            My passion lies in leveraging AI and automation to create powerful business solutions. 
-            Whether it&apos;s implementing LLMs to revolutionize content creation or building intelligent 
-            systems that optimize marketing processes, I love taking businesses from manual 
-            operations to intelligent automation.
-          </p>
-          
-          <p className="text-lg">
-            From diving into large language models in 2022 to mastering advanced AI implementation techniques, 
-            I&apos;ve continually expanded my technical toolkit while maintaining a strong focus on delivering 
-            measurable business outcomes. My unique background combining marketing expertise with 
-            programming skills allows me to bridge the gap between business challenges and technical solutions.
-          </p>
-          
-          <p className="text-lg">
-            Each project presents unique challenges, and I ensure I learn and grow through each one, 
-            delivering AI-powered solutions that businesses can rely on to drive growth and innovation. 
-            Want to learn more? Here&apos;s{' '}
-            <Link href="/resume" className="underline text-teal-400 hover:text-teal-300 transition-colors">
-              my résumé
-            </Link>
-            .
-          </p>
+    <section id="about" className="w-full py-16">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-3 relative inline-block">
+            Where It All Began
+            <span className="absolute bottom-0 left-1/4 right-1/4 h-1 bg-teal-400" />
+          </h2>
+          <p className="text-xl text-teal-400 mt-4">My journey from business to AI</p>
         </div>
-
-        {/* Right column - Skills */}
-        <div className="lg:max-w-md space-y-14">
-          {/* Technical Skills */}
-          <div className="relative">
-            <h2 className="text-2xl font-bold mb-5">Technical Skills</h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">Programming</h3>
-                <p>Python, JavaScript, TypeScript, NextJS</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">Web Development</h3>
-                <p>Frontend development, UI/UX, API integration</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">AI/ML</h3>
-                <p>Large Language Models, Machine Learning, Generative AI</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">AI Frameworks</h3>
-                <p>LangChain, Crew AI, Marketing automation</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">AI Tools</h3>
-                <p>CRM integration, Zapier, Make, Data processing</p>
+        
+        <div ref={containerRef} className="relative">
+          {/* Intro Card */}
+          <div className="animate-card opacity-0 transition-all duration-500 ease-out transform translate-y-8 bg-neutral-800/50 backdrop-blur-md rounded-xl p-8 border-l-4 border-l-teal-400 shadow-lg mb-16 relative z-10">
+            <p className="text-lg text-center text-neutral-300">
+              Late 2022, I found myself captivated by ChatGPT's capabilities. What began as curiosity quickly transformed into a realization that my business background provided a unique advantage in the AI landscape—the ability to bridge technical possibilities with practical business applications.
+            </p>
+          </div>
+          
+          <div className="space-y-24 relative"> {/* Increased spacing between cards */}
+            {/* Card 1 */}
+            <div className="animate-card card-wrapper opacity-0 transition-all duration-500 ease-out transform translate-y-8 relative z-10">
+              <h3 className="text-xl font-semibold text-teal-400 mb-6 text-center">The Realization</h3>
+              <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
+                <div className="text-3xl text-teal-400 mb-4 text-center">✨</div>
+                <p className="text-neutral-300">
+                  That evening in 2022 changed everything. Testing ChatGPT's limits, I witnessed something revolutionary—a system that mirrored human intuition with uncanny consistency. It wasn't just another algorithm; it represented a fundamental shift in what technology could achieve.
+                </p>
               </div>
             </div>
             
-            {/* Decorative element */}
-            <div className="absolute -right-6 top-1/3 hidden lg:block">
-              <div className="w-16 h-16 rounded-full bg-teal-400/20 blur-xl"/>
+            {/* Card 2 */}
+            <div className="animate-card card-wrapper opacity-0 transition-all duration-500 ease-out transform translate-y-8 relative z-10 delay-100">
+              <h3 className="text-xl font-semibold text-teal-400 mb-6 text-center">The Fascination</h3>
+              <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
+                <div className="text-3xl text-teal-400 mb-4 text-center">🧠</div>
+                <p className="text-neutral-300">
+                  For years I'd wondered how our minds transform random thoughts into coherent decisions. Now I was witnessing a mathematical model that offered glimpses into our own cognitive processes, making me feel like we were beginning to understand the mechanics of thought itself.
+                </p>
+              </div>
+            </div>
+            
+            {/* Card 3 */}
+            <div className="animate-card card-wrapper opacity-0 transition-all duration-500 ease-out transform translate-y-8 relative z-10 delay-200">
+              <h3 className="text-xl font-semibold text-teal-400 mb-6 text-center">The Possibilities</h3>
+              <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
+                <div className="text-3xl text-teal-400 mb-4 text-center">🔍</div>
+                <p className="text-neutral-300">
+                  I envisioned blind individuals navigating independently, people with ADHD receiving perfectly timed reminders, and businesses automating creative processes. We were stepping into uncharted territory, but the potential to unlock human capability seemed limitless.
+                </p>
+              </div>
+            </div>
+            
+            {/* Card 4 */}
+            <div className="animate-card card-wrapper opacity-0 transition-all duration-500 ease-out transform translate-y-8 relative z-10 delay-300">
+              <h3 className="text-xl font-semibold text-teal-400 mb-6 text-center">The Transformation</h3>
+              <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
+                <div className="text-3xl text-teal-400 mb-4 text-center">🚀</div>
+                <p className="text-neutral-300">
+                  What started as curiosity evolved into obsession. I realized my business background wasn't a disadvantage—it was exactly what was needed: someone who could bridge technical capabilities with practical applications, translating AI potential into business value.
+                </p>
+              </div>
             </div>
           </div>
-
-          {/* Business Skills */}
-          <div>
-            <h2 className="text-2xl font-bold mb-5">Business Skills</h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">Digital Marketing Strategy</h3>
-                <p>Social media strategy, Content marketing, SEO, Analytics</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">Client Relationship Management</h3>
-                <p>Discovery, Requirements gathering, Stakeholder communication</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">Project Management</h3>
-                <p>Agile methodologies, Cross-functional leadership</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">Cross-cultural Communication</h3>
-                <p>International marketing, Global audience targeting</p>
-              </div>
-              
-              <div>
-                <h3 className="text-teal-400 font-medium mb-1">Financial Analysis</h3>
-                <p>ROI assessment, Budget optimization, Performance metrics</p>
-              </div>
-            </div>
+          
+          <div className="mt-16 text-center relative z-10">
+            <Link 
+              href="/resume" 
+              className="inline-block px-6 py-3 border-2 border-teal-400 text-teal-400 font-semibold rounded transition-all duration-300 hover:bg-teal-400 hover:text-neutral-900"
+            >
+              View My Résumé
+            </Link>
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        .animate-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        @keyframes dash {
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+        
+        /* Add delay classes for staggered animations */
+        .delay-100 {
+          transition-delay: 100ms;
+        }
+        
+        .delay-200 {
+          transition-delay: 200ms;
+        }
+        
+        .delay-300 {
+          transition-delay: 300ms;
+        }
+      `}</style>
     </section>
   );
 };
 
+// Support both named and default exports
 export default About;
