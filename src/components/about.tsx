@@ -42,14 +42,17 @@ export const About = () => {
   // Function to draw animated connecting lines between cards
   const drawConnectingLines = () => {
     const cards = document.querySelectorAll('.card-content');
-    if (cards.length < 2) return;
+    // Also select the intro card
+    const introCard = document.querySelector('.animate-card:first-child');
+    
+    if (!cards.length || !introCard) return;
 
     // Remove any existing SVG
     const existingSvg = document.getElementById('connecting-lines');
     if (existingSvg) {
       existingSvg.remove();
     }
-
+    
     const container = containerRef.current;
     if (!container) return;
     
@@ -68,6 +71,56 @@ export const About = () => {
     
     // Insert SVG as first child so it's behind the cards
     container.insertBefore(svg, container.firstChild);
+    
+    // Connect intro card to first card
+    if (introCard && cards.length > 0) {
+      const introRect = introCard.getBoundingClientRect();
+      const firstCardRect = cards[0].getBoundingClientRect();
+      
+      // Calculate relative positions to the container
+      const startX = introRect.left + introRect.width / 2 - containerRect.left;
+      const startY = introRect.bottom - containerRect.top;
+      const endX = firstCardRect.left + firstCardRect.width / 2 - containerRect.left;
+      const endY = firstCardRect.top - containerRect.top;
+      
+      // Create dashed path
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      
+      // Create a path that curves between the cards
+      const curveControl = (startY + endY) / 2;
+      const pathData = `M ${startX},${startY} C ${startX},${curveControl} ${endX},${curveControl} ${endX},${endY}`;
+      
+      path.setAttribute('d', pathData);
+      path.setAttribute('stroke', '#2dd4bf');
+      path.setAttribute('stroke-width', '2');
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke-dasharray', '5,5');
+      
+      // Add animation for dashed line
+      const animateElement = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateElement.setAttribute('attributeName', 'stroke-dashoffset');
+      animateElement.setAttribute('from', '100');
+      animateElement.setAttribute('to', '0');
+      animateElement.setAttribute('dur', '15s');
+      animateElement.setAttribute('repeatCount', 'indefinite');
+      
+      path.appendChild(animateElement);
+      svg.appendChild(path);
+      
+      // Add moving dots along the path
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('r', '5');
+      circle.setAttribute('fill', '#2dd4bf');
+      circle.setAttribute('filter', 'drop-shadow(0 0 3px rgba(45, 212, 191, 0.8))');
+      
+      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+      animateMotion.setAttribute('path', pathData);
+      animateMotion.setAttribute('dur', '3s');
+      animateMotion.setAttribute('repeatCount', 'indefinite');
+      
+      circle.appendChild(animateMotion);
+      svg.appendChild(circle);
+    }
     
     // Connect cards with lines
     for (let i = 0; i < cards.length - 1; i++) {
@@ -135,7 +188,7 @@ export const About = () => {
         
         <div ref={containerRef} className="relative">
           {/* Intro Card */}
-          <div className="animate-card opacity-0 transition-all duration-500 ease-out transform translate-y-8 bg-neutral-800/50 backdrop-blur-md rounded-xl p-8 border-l-4 border-l-teal-400 shadow-lg mb-16 relative z-10">
+          <div className="animate-card opacity-0 transition-all duration-500 ease-out transform translate-y-8 bg-neutral-800/50 backdrop-blur-md rounded-xl p-8 border-l-4 border-t-4 border-r-4 border-l-teal-400 border-t-teal-400 border-r-teal-400 shadow-lg mb-16 relative z-10">
             <p className="text-lg text-center text-neutral-300">
               Late 2022, I found myself captivated by ChatGPT&apos;s capabilities. What began as curiosity quickly transformed into a realization that my business background provided a unique advantage in the AI landscape—the ability to bridge technical possibilities with practical business applications.
             </p>
@@ -178,7 +231,7 @@ export const About = () => {
             {/* Card 4 */}
             <div className="animate-card card-wrapper opacity-0 transition-all duration-500 ease-out transform translate-y-8 relative z-10 delay-300">
               <h3 className="text-xl font-semibold text-teal-400 mb-6 text-center">The Transformation</h3>
-              <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-t-4 border-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
+              <div className="card-content bg-neutral-800/50 backdrop-blur-md rounded-xl p-6 border-l-4 border-b-4 border-r-4 border-l-teal-400 border-b-teal-400 border-r-teal-400 shadow-lg hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
                 <div className="text-3xl text-teal-400 mb-4 text-center">🚀</div>
                 <p className="text-neutral-300">
                   What started as curiosity evolved into obsession. I realized my business background wasn&apos;t a disadvantage—it was exactly what was needed: someone who could bridge technical capabilities with practical applications, translating AI potential into business value.
