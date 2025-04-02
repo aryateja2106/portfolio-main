@@ -3,6 +3,7 @@ import { Inter, Poppins, Fira_Code } from 'next/font/google'
 
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import CursorAnimationWrapper from '@/components/cursor-animation-wrapper'
 // import { Providers } from './providers'
 import './globals.css'
 
@@ -93,6 +94,7 @@ export default function RootLayout({
       >
         {/* <Providers> */}
           <div className="relative">
+            <CursorAnimationWrapper />
             <Header />
             <div>{children}</div>
             <Footer />
