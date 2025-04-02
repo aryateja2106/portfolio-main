@@ -1,82 +1,71 @@
 "use client";
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 
 type Quality = {
   title: string;
   description: string;
-  emoji: string;
+  icon: string;
+  color: string;
 };
 
 export const Qualities = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right">("left");
-
   const qualities: Quality[] = [
+    {
+      title: "Positivity",
+      description:
+        "Approaching AI challenges with optimism and a solutions-oriented mindset, transforming obstacles into opportunities for innovation.",
+      icon: "✨",
+      color: "from-teal-500/20 to-teal-500/5",
+    },
     {
       title: "Passion",
       description:
-        "An unwavering passion that grows beyond boundaries, shaping innovative AI solutions with every project I undertake.",
-      emoji: "∞",
+        "Driven by deep enthusiasm for AI technology that fuels continuous learning and delivers excellence in every project I undertake.",
+      icon: "🔥",
+      color: "from-cyan-500/20 to-cyan-500/5",
+    },
+    {
+      title: "Ambition",
+      description:
+        "Setting bold goals and persistently pursuing advancements that push the boundaries of what's possible with AI solutions.",
+      icon: "🚀",
+      color: "from-blue-500/20 to-blue-500/5",
     },
     {
       title: "Innovation",
       description:
-        "Constantly seeking creative approaches to leverage AI and automation, turning complex business challenges into elegant solutions.",
-      emoji: "💡",
+        "Constantly exploring creative approaches to leverage AI and automation, turning complex business challenges into elegant solutions.",
+      icon: "💡",
+      color: "from-purple-500/20 to-purple-500/5",
     },
     {
-      title: "Technical Aptitude",
+      title: "Technical Expertise",
       description:
-        "Blending AI expertise with practical programming skills to build intelligent systems that deliver measurable business impact.",
-      emoji: "⚙️",
-    },
-    {
-      title: "Adaptability",
-      description:
-        "Quickly learning and applying new technologies and methodologies, from LLMs to marketing automation across diverse industries.",
-      emoji: "🔄",
+        "Blending AI knowledge with practical programming skills to build intelligent systems that deliver measurable business impact.",
+      icon: "⚙️",
+      color: "from-emerald-500/20 to-emerald-500/5",
     },
     {
       title: "Client-Focused",
       description:
-        "Maintaining 90%+ satisfaction rates by translating technical concepts into clear business value propositions for stakeholders.",
-      emoji: "🤝",
+        "Maintaining exceptional satisfaction rates by translating technical concepts into clear value propositions for stakeholders.",
+      icon: "🤝",
+      color: "from-teal-500/20 to-teal-500/5",
     },
   ];
 
-  // Store qualities length in a ref to avoid dependency in useCallback
-  const qualitiesLengthRef = useRef(qualities.length);
-
-  const goToPrevious = () => {
-    setDirection("right");
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? qualitiesLengthRef.current - 1 : prevIndex - 1
-    );
-  };
-
-  const goToNext = useCallback(() => {
-    setDirection("left");
-    setCurrentIndex((prevIndex) =>
-      prevIndex === qualitiesLengthRef.current - 1 ? 0 : prevIndex + 1
-    );
-  }, []);   
-
-  // Auto-rotate qualities every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(goToNext, 5000);
-    return () => clearInterval(interval);
-  }, [goToNext]);
-
-  const variants = {
-    enter: (direction: "left" | "right") => ({
-      x: direction === "left" ? "100%" : "-100%",
-      opacity: 0,
-    }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction: "left" | "right") => ({
-      x: direction === "left" ? "-100%" : "100%",
-      opacity: 0,
+  // Card animation variants
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.1 * index,
+        duration: 0.4,
+        ease: "easeOut",
+      },
     }),
   };
 
@@ -88,112 +77,62 @@ export const Qualities = () => {
         <div className="h-px bg-gray-600 flex-grow" />
       </h2>
       <p className="text-gray-400 mb-12 text-lg max-w-2xl">
-        apart from a positive attitude and polite demeanour
+        My core qualities that drive success in every AI solution I deliver
       </p>
 
-      <div className="flex flex-col md:flex-row items-stretch gap-10 md:gap-16 md:min-h-[20rem] relative overflow-hidden">
-        {/* Left side - Card with emoji */}
-        <div className="w-full md:w-1/2 max-w-md">
-          <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg p-8 flex flex-col items-center justify-center shadow-xl relative overflow-hidden z-10">
-            <AnimatePresence custom={direction} mode="popLayout">
-              <motion.div
-                key={currentIndex}
-                className="text-9xl text-white text-center glow"
-                initial="enter"
-                animate="center"
-                exit="exit"
-                variants={variants}
-                transition={{ duration: 0.5 }}
-                custom={direction}
-              >
-                {qualities[currentIndex].emoji}
-              </motion.div>
-            </AnimatePresence>
-            <div className="absolute bottom-4 right-4 text-teal-500/10 text-9xl font-bold">
-              {currentIndex + 1}
-            </div>
-          </div>
-        </div>
-
-        {/* Right side - Description */}
-        <div className="w-full md:w-1/2 flex flex-col justify-between">
-          <div>
-            <h3 className="text-2xl font-semibold mb-6 flex items-center">
-              <span className="text-teal-400 mr-3">
-                {qualities[currentIndex].title}
-              </span>
-              <div className="h-px bg-teal-500/30 w-24" />
-            </h3>
-            <AnimatePresence custom={direction} mode="popLayout">
-              <motion.p
-                key={currentIndex}
-                className="text-lg text-gray-300 leading-relaxed max-w-xl"
-                initial="enter"
-                animate="center"
-                exit="exit"
-                variants={variants}
-                transition={{ duration: 0.5 }}
-                custom={direction}
-              >
-                {qualities[currentIndex].description}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation and indicators */}
-          <div className="mt-auto">
-            {/* Indicators */}
-            <div className="flex gap-2 mb-6">
-              {qualities.map((q, index) => (
-                <button
-                  title={q.title}
-                  type="button"
-                  key={q.title}
-                  className={`h-1 rounded-full transition-all duration-300 cursor-pointer ${
-                    index === currentIndex
-                      ? "bg-teal-400 w-8"
-                      : "bg-gray-600 w-4 hover:bg-gray-500"
-                  }`}
-                  onClick={() => {
-                    setDirection(index > currentIndex ? "left" : "right");
-                    setCurrentIndex(index);
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Navigation buttons */}
-            <div className="flex gap-4">
-              <button
-                type="button"
-                onClick={goToPrevious}
-                className="w-12 h-12 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors border border-gray-700 hover:border-teal-500 group"
-                aria-label="Previous quality"
-              >
-                <span className="text-teal-400 group-hover:scale-125 transition-transform">
-                  ←
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={goToNext}
-                className="w-12 h-12 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors border border-gray-700 hover:border-teal-500 group"
-                aria-label="Next quality"
-              >
-                <span className="text-teal-400 group-hover:scale-125 transition-transform">
-                  →
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {qualities.map((quality, index) => (
+          <motion.div
+            key={quality.title}
+            className="h-full"
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            custom={index}
+          >
+            <motion.div
+              className={"h-full bg-slate-900/60 rounded-xl border border-slate-800 p-6 hover:border-teal-500/50 transition-all duration-300 flex flex-col overflow-hidden relative group"}
+              whileHover={{ 
+                scale: 1.02,
+                transition: { duration: 0.2 } 
+              }}
+            >
+              {/* Background Gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${quality.color} opacity-30 group-hover:opacity-40 transition-opacity duration-300`} />
+              
+              {/* Content */}
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Icon */}
+                <div className="mb-4 text-4xl">
+                  <motion.div
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {quality.icon}
+                  </motion.div>
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-xl font-semibold mb-3 text-teal-400">
+                  {quality.title}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-gray-300 leading-relaxed">
+                  {quality.description}
+                </p>
+                
+                {/* Corner decoration */}
+                <div className="absolute bottom-0 right-0 w-16 h-16 text-slate-800/30 flex items-center justify-center">
+                  <div className="absolute transform rotate-45 w-20 h-2 bg-slate-700/30 -bottom-6 -right-6 group-hover:bg-teal-500/20 transition-colors duration-300" />
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        ))}
       </div>
-
-      <style jsx global>{`
-        .glow {
-          text-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
-        }
-      `}</style>
     </section>
   );
 };
