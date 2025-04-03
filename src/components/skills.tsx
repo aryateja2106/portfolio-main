@@ -1,43 +1,13 @@
 "use client"
 import React from 'react';
 import { motion } from 'framer-motion';
-import { IconCloud } from './IconCloud';
+import dynamic from 'next/dynamic';
+
+const TechGravity = dynamic(() => import('./tech-gravity'), { ssr: false });
 
 
 export const TechStack = () => {
-  // Define technology slugs for the IconCloud
-  const slugs = [
-    "typescript",
-    "javascript",
-    "dart",
-    "java",
-    "react",
-    "flutter",
-    "android",
-    "html5",
-    "css3",
-    "nodedotjs",
-    "express",
-    "nextdotjs",
-    "prisma",
-    "amazonaws",
-    "postgresql",
-    "firebase",
-    "nginx",
-    "vercel",
-    "testinglibrary",
-    "jest",
-    "cypress",
-    "docker",
-    "git",
-    "jira",
-    "github",
-    "gitlab",
-    "visualstudiocode",
-    "androidstudio",
-    "sonarqube",
-    "figma",
-  ];
+
 
   // Technology categories for structuring the visual presentation
   const categories = [
@@ -47,10 +17,6 @@ export const TechStack = () => {
     { name: "Design & Collaboration", color: "from-orange-500/20 to-blue-500/20" },
   ];
 
-  // Map slugs to image URLs for the IconCloud component
-  const images = slugs.map(
-    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
-  );
 
   return (
     <section className="w-full mt-28 relative overflow-hidden py-16">
@@ -103,6 +69,7 @@ export const TechStack = () => {
             ))}
           </div>
 
+
           {/* Icon Cloud */}
           <motion.div 
             className="h-[60vh] w-full my-10 relative bg-gradient-to-b from-transparent via-slate-900/30 to-transparent rounded-3xl overflow-hidden border border-slate-800"
@@ -111,11 +78,10 @@ export const TechStack = () => {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            <div className="relative flex size-full items-center justify-center overflow-hidden bg-accent-foreground">
-              <IconCloud images={images} />
+            <div className="relative flex size-full items-center justify-center overflow-hidden">
+          <TechGravity />
             </div>
           </motion.div> 
-
           {/* Call to action or additional info */}
           <motion.p 
             className="text-center text-gray-400 mt-8 max-w-2xl mx-auto"

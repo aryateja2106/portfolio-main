@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -6,7 +5,6 @@ import { useEffect, useState } from 'react'
 import { Typewriter } from './typewriter'
 import { ExploreButton } from './explore-button'
 
-import Robot from '../../public/assets/Robot.png'
 
 export function Hero() {
   const [isMounted, setIsMounted] = useState(false)
@@ -71,15 +69,6 @@ export function Hero() {
         </div>
       )}
 
-      {/* Mobile robot background */}
-      <div className="absolute left-1/2 top-1/2 w-max -translate-x-1/2 -translate-y-1/2 opacity-10 dark:opacity-5 md:hidden">
-        <Image
-          src={Robot}
-          alt="Deconstructed Robot Light"
-          className="w-96 object-cover"
-          priority
-        />
-      </div>
 
       {/* Main content */}
       <motion.div 
@@ -126,7 +115,7 @@ export function Hero() {
           
           {/* Value Proposition with animated reveal */}
           <motion.p 
-            className="text-neutral-300 text-lg max-w-lg text-center md:text-left backdrop-blur-sm backdrop-brightness-50 md:backdrop-brightness-100 p-2 md:p-0 rounded-lg border border-neutral-800/40 md:border-0"
+            className="text-neutral-300 text-lg max-w-lg text-center md:text-left backdrop-blur-sm md:backdrop-brightness-100 p-2 md:p-0 rounded-lg border border-neutral-800/40 md:border-0"
             variants={itemVariants}
           >
            Helping you navigate the AI tool landscape to find the perfect solutions for your unique needs.

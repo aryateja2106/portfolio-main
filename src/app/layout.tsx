@@ -3,8 +3,7 @@ import { Inter, Poppins, Fira_Code } from 'next/font/google'
 
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import CursorAnimationWrapper from '@/components/cursor-animation-wrapper'
-// import { Providers } from './providers'
+import BinaryCursor from '@/components/cursor-animation-wrapper'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -92,14 +91,12 @@ export default function RootLayout({
       <body
         className={`scroll-smooth bg-neutral-50 dark:bg-neutral-950 font-sans text-neutral-900 dark:text-neutral-300 selection:bg-neutral-1000 selection:text-neutral-50 dark:selection:bg-neutral-50 dark:selection:text-neutral-1000 ${inter.variable} ${poppins.variable} ${firaCode.variable}`}
       >
-        {/* <Providers> */}
           <div className="relative">
-            <CursorAnimationWrapper />
+            <BinaryCursor />
             <Header />
             <div>{children}</div>
             <Footer />
           </div>
-        {/* </Providers> */}
       </body>
     </html>
   )
