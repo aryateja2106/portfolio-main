@@ -47,10 +47,9 @@ export function Hero() {
   }
 
   return (
-    <div className="relative flex min-h-[85vh] w-full flex-col items-center justify-center py-8 px-4 md:px-0">
+    <div className="relative flex min-h-[85vh] w-full flex-col items-center md:justify-center py-8 px-4 md:px-0">
       {/* Background effects */}
       <div className="absolute -z-50 h-64 w-64 top-20 left-0 bg-[conic-gradient(transparent,rgb(0,0,0))] opacity-15 blur-2xl dark:bg-[conic-gradient(transparent,rgb(255,255,255))] md:left-36" />
-      <div className="absolute -z-50 h-64 w-64 bottom-20 right-0 bg-[conic-gradient(transparent,rgb(0,0,0))] opacity-15 blur-2xl dark:bg-[conic-gradient(transparent,rgb(255,255,255))]" />
       
       {/* Binary digits background effect (subtle) - Client-side only to prevent hydration mismatch */}
       {isMounted && (
@@ -166,26 +165,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
         
-        {/* Right column: Robot image with animation */}
-        <motion.div 
-          className="hidden w-full md:w-2/5 flex-1 items-center justify-end md:flex"
-          variants={itemVariants}
-          whileHover={{ 
-            scale: 1.03,
-            transition: { duration: 0.3 }
-          }}
-        >
-          <div className="relative">
-            <Image
-              src={Robot}
-              alt="Deconstructed Robot Light"
-              className="w-72 object-cover drop-shadow-[0_0_15px_rgba(45,212,191,0.3)]"
-              priority
-            />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-teal-400/5 to-transparent blur-xl" />
-          </div>
-          <div className="absolute -z-50 h-64 w-64 bg-[conic-gradient(transparent,rgb(0,0,0))] opacity-40 blur-2xl dark:bg-[conic-gradient(transparent,rgb(255,255,255))] md:right-0" />
-        </motion.div>
+   
       </motion.div>
     </div>
   )
