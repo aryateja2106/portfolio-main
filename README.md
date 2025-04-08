@@ -6,7 +6,7 @@ A modern, interactive portfolio website built with Next.js 15, React 19, TypeScr
 
 ## Features
 
-- **Modern Tech Stack**: Next.js 15, React 19, TypeScript, and Tailwind CSS
+- **Modern Tech Stack**: Next.js 15, React 19, TypeScript, and Tailwind CSS.
 - **Interactive UI Elements**: 
   - Binary animation that follows cursor movements
   - Typewriter text effect
