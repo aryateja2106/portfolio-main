@@ -2,38 +2,8 @@
   import Gravity, { MatterBody } from "@/fancy/components/physics/gravity"
   import Image from "next/image"
     
-    export default function TechGravity({ activeCategory }: { activeCategory: string }) {
-      console.log(activeCategory)
-      const slugs = [
-          "typescript",
-          "javascript",
-          "dart",
-          "react",
-          "flutter",
-          "android",
-          "html5",
-          "css3",
-          "nodedotjs",
-          "express",
-          "nextdotjs",
-          "prisma",
-          "postgresql",
-          "firebase",
-          "nginx",
-          "vercel",
-          "testinglibrary",
-          "jest",
-          "cypress",
-          "docker",
-          "git",
-          "jira",
-          "github",
-          "gitlab",
-          "androidstudio",
-          "sonarqube",
-          "figma",
-        ];
-  
+    export default function TechGravity({  slugs }: {  slugs: string[] }) {
+      
       return (
         <div className="w-full h-full flex flex-col items-center relative ">
           <Gravity gravity={{ x: 0, y: 1 }} className="w-full h-full">
