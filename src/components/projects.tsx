@@ -192,7 +192,7 @@ interface AccordionItemProps { value: string; children: ReactNode; className?: s
 const AccordionItem: FC<AccordionItemProps> = ({ value, children, className = '' }) => ( <div className={`${className}`} data-value={value}>{children}</div> );
 interface AccordionTriggerProps { children: ReactNode; className?: string; onClick: () => void; isOpen: boolean; }
 const AccordionTrigger: FC<AccordionTriggerProps> = ({ children, className = '', onClick, isOpen }) => (
-    <button type="button" aria-expanded={isOpen} className={`flex w-full items-center justify-between py-3 text-sm font-medium transition-all hover:text-neutral-100 text-neutral-400 ${className}`} onClick={onClick}>
+    <button aria-hidden="true" type="button" aria-expanded={isOpen} className={`flex w-full items-center justify-between py-3 text-sm font-medium transition-all hover:text-neutral-100 text-neutral-400 ${className}`} onClick={onClick}>
       {children}
       <motion.svg 
         xmlns="http://www.w3.org/2000/svg" 

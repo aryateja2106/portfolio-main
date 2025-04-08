@@ -1,22 +1,26 @@
 "use client"
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 const TechGravity = dynamic(() => import('./tech-gravity'), { ssr: false });
 
+// Define the skill categories
+const categories = [
+  { name: "Languages", color: "from-blue-500/20 to-teal-500/20" },
+  { name: "Frameworks", color: "from-teal-500/20 to-purple-500/20" },
+  { name: "Tools & Infrastructure", color: "from-purple-500/20 to-orange-500/20" },
+  { name: "Design & Collaboration", color: "from-orange-500/20 to-blue-500/20" },
+];
 
 export const TechStack = () => {
-
-
-  // Technology categories for structuring the visual presentation
-  const categories = [
-    { name: "Languages", color: "from-blue-500/20 to-teal-500/20" },
-    { name: "Frameworks", color: "from-teal-500/20 to-purple-500/20" },
-    { name: "Tools & Infrastructure", color: "from-purple-500/20 to-orange-500/20" },
-    { name: "Design & Collaboration", color: "from-orange-500/20 to-blue-500/20" },
-  ];
-
+  // Track which category is active (only one at a time)
+  const [activeCategory, setActiveCategory] = useState<string>("Languages");
+  
+  // Function to activate a category
+  const handleCategoryClick = (category: string) => {
+    setActiveCategory(category);
+  };
 
   return (
     <section className="w-full mt-28 relative overflow-hidden py-16">
@@ -55,20 +59,32 @@ export const TechStack = () => {
           {/* Category tiles above the icon cloud */}
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             {categories.map((category, index) => (
-              <motion.div
+              <motion.button
                 key={category.name}
-                className={`px-5 py-3 rounded-full bg-gradient-to-r ${category.color} border border-slate-700 shadow-lg`}
+                onClick={() => handleCategoryClick(category.name)}
+                disabled={activeCategory === category.name}
+                className={`px-5 py-3 rounded-full bg-gradient-to-r ${category.color} border ${
+                  activeCategory === category.name 
+                    ? "border-teal-500/50 shadow-teal-500/20 shadow-lg" 
+                    : "border-slate-700 hover:border-slate-600"
+                } transition-all duration-300 focus:outline-none`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                whileHover={{ scale: 1.05, borderColor: 'rgba(45, 212, 191, 0.5)' }}
+                whileHover={{ scale: activeCategory === category.name ? 1 : 1.05 }}
               >
-                <span className="text-sm font-medium">{category.name}</span>
-              </motion.div>
+                <span className="text-sm font-medium flex items-center gap-2">
+                  {category.name}
+                  {activeCategory === category.name && (
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </span>
+              </motion.button>
             ))}
           </div>
-
 
           {/* Icon Cloud */}
           <motion.div 
@@ -79,7 +95,7 @@ export const TechStack = () => {
             transition={{ duration: 1, delay: 0.6 }}
           >
             <div className="relative flex size-full items-center justify-center overflow-hidden">
-          <TechGravity />
+              <TechGravity activeCategory={activeCategory} />
             </div>
           </motion.div> 
           {/* Call to action or additional info */}

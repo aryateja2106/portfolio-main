@@ -3,7 +3,7 @@
 import {
   createContext,
   forwardRef,
-  ReactNode,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -89,7 +89,6 @@ export const MatterBody = ({
   x = 0,
   y = 0,
   angle = 0,
-  ...props
 }: MatterBodyProps) => {
   const elementRef = useRef<HTMLDivElement>(null)
   const idRef = useRef(Math.random().toString(36).substring(7))
@@ -108,12 +107,10 @@ export const MatterBody = ({
       x,
       y,
       angle,
-      ...props,
     })
 
     return () => context.unregisterElement(idCurrent)
   }, [
-    props,
     children,
     matterBodyOptions,
     isDraggable,
@@ -122,7 +119,7 @@ export const MatterBody = ({
     sampleLength,
     x,
     y,
-    angle,
+    angle,  
   ])
 
   return (
@@ -150,7 +147,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       addTopWall = true,
       autoStart = true,
       className,
-      ...props
     },
     ref
   ) => {
@@ -182,7 +178,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         const x = calculatePosition(props.x, canvasRect.width, width)
         const y = calculatePosition(props.y, canvasRect.height, height)
 
-        let body
+        let body: Matter.Body
         if (props.bodyType === "circle") {
           const radius = Math.max(width, height) / 2
           body = Bodies.circle(x, y, radius, {
@@ -200,7 +196,8 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 
           for (const path of paths) {
             const d = path.getAttribute("d")
-            const p = parsePathToVertices(d!, props.sampleLength)
+            if (!d) continue
+            const p = parsePathToVertices(d, props.sampleLength)
             vertexSets.push(p)
           }
 
@@ -244,14 +241,14 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 
     // Keep react elements in sync with the physics world
     const updateElements = useCallback(() => {
-      bodiesMap.current.forEach(({ element, body }) => {
+      for (const { element, body } of bodiesMap.current.values()) {
         const { x, y } = body.position
         const rotation = body.angle * (180 / Math.PI)
 
         element.style.transform = `translate(${
           x - element.offsetWidth / 2
         }px, ${y - element.offsetHeight / 2}px) rotate(${rotation}deg)`
-      })
+      }
 
       frameId.current = requestAnimationFrame(updateElements)
     }, [])
@@ -533,7 +530,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         <div
           ref={canvas}
           className={cn(className, "absolute top-0 left-0 w-full h-full")}
-          {...props}
         >
           {children}
         </div>
