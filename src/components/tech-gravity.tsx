@@ -33,9 +33,6 @@ import Image from "next/image"
         "figma",
       ];
 
-
-
-  
     return (
       <div className="w-full h-full flex flex-col items-center relative ">
         <Gravity gravity={{ x: 0, y: 1 }} className="w-full h-full">

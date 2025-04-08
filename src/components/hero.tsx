@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 
 import { Typewriter } from './typewriter'
 import { ExploreButton } from './explore-button'
+import Image from "next/image";
+import Robot from "../../public/assets/Robot.png";
 
 
 export function Hero() {
@@ -45,6 +47,7 @@ export function Hero() {
   }
 
   return (
+    <div className="w-full px-4 md:max-w-4xl lg:px-0 pb-28 pt-20 m-auto space-y-28 overflow-hidden">
     <div className="relative flex min-h-[85vh] w-full flex-col items-center md:justify-center py-8 px-4 md:px-0">
       {/* Background effects */}
       <div className="absolute -z-50 h-64 w-64 top-20 left-0 bg-[conic-gradient(transparent,rgb(0,0,0))] opacity-15 blur-2xl dark:bg-[conic-gradient(transparent,rgb(255,255,255))] md:left-36" />
@@ -82,7 +85,7 @@ export function Hero() {
           {/* Name with sparkle effect */}
           <div className="relative">
             <motion.span 
-              className="w-min font-bold text-black drop-shadow-2xl dark:text-neutral-50 md:w-max"
+              className="flex flex-col items-center md:items-start w-min font-bold text-black drop-shadow-2xl dark:text-neutral-50 md:w-max"
               variants={itemVariants}
             >
               <span className="relative text-5xl text-teal-400">
@@ -153,9 +156,53 @@ export function Hero() {
             <ExploreButton />
           </motion.div>
         </motion.div>
-        
-   
+        <motion.div 
+          className="transform  -translate-y-1/6 z-20 hidden md:block"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          whileHover={{ 
+          scale: 1.03,
+          transition: { duration: 0.3 }
+        }}
+      >
+        <div className="relative">
+          <Image
+            src={Robot}
+            alt="Deconstructed Robot Light"
+            className="w-72 object-cover drop-shadow-[0_0_15px_rgba(45,212,191,0.3)]"
+            priority
+          />
+          <div className="absolute -z-50 h-64 w-64 bottom-20 right-0 bg-[conic-gradient(transparent,rgb(0,0,0))] opacity-15 blur-2xl dark:bg-[conic-gradient(transparent,rgb(255,255,255))]" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-teal-400/5 to-transparent blur-xl" />
+        </div>
       </motion.div>
+         <div className="flex flex-col items-center">
+          {/* Robot for mobile/tablet views */}
+          <motion.div 
+            className="md:hidden w-full flex justify-center"
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ 
+              scale: 1.03,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <div className="relative">
+              <Image
+                src={Robot}
+                alt="Deconstructed Robot Light"
+                className="w-64 object-cover drop-shadow-[0_0_15px_rgba(45,212,191,0.3)]"
+                priority
+              />
+              <div className="absolute -z-50 h-64 w-64 bottom-20 right-0 bg-[conic-gradient(transparent,rgb(0,0,0))] opacity-15 blur-2xl dark:bg-[conic-gradient(transparent,rgb(255,255,255))]" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-teal-400/5 to-transparent blur-xl" />
+            </div>
+          </motion.div>
+        </div>  
+      </motion.div>
+    </div>
     </div>
   )
 }

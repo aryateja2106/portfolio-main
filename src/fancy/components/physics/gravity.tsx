@@ -198,11 +198,11 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
           const paths = element.querySelectorAll("path")
           const vertexSets: Matter.Vector[][] = []
 
-          paths.forEach((path) => {
+          for (const path of paths) {
             const d = path.getAttribute("d")
             const p = parsePathToVertices(d!, props.sampleLength)
             vertexSets.push(p)
-          })
+          }
 
           body = Bodies.fromVertices(x, y, vertexSets, {
             ...props.matterBodyOptions,
