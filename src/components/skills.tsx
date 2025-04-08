@@ -7,19 +7,62 @@ const TechGravity = dynamic(() => import('./tech-gravity'), { ssr: false });
 
 // Define the skill categories
 const categories = [
-  { name: "Languages", color: "from-blue-500/20 to-teal-500/20" },
-  { name: "Frameworks", color: "from-teal-500/20 to-purple-500/20" },
-  { name: "Tools & Infrastructure", color: "from-purple-500/20 to-orange-500/20" },
-  { name: "Design & Collaboration", color: "from-orange-500/20 to-blue-500/20" },
+  { key:1, name: "Languages", color: "from-blue-500/20 to-teal-500/20" },
+  { key:2, name: "Frameworks", color: "from-teal-500/20 to-purple-500/20" },
+  { key:3, name: "Tools & Infrastructure", color: "from-purple-500/20 to-orange-500/20" },
+  { key:4, name: "Design & Collaboration", color: "from-orange-500/20 to-blue-500/20" },
 ];
+
+// Define slug categories
+const slugCategories = {
+  "Languages": [
+    "typescript",
+    "javascript",
+    "dart",
+    "html5",
+    "css3",
+  ],
+  "Frameworks": [
+    "react",
+    "flutter",
+    "android",
+    "nodedotjs",
+    "express",
+    "nextdotjs",
+    "prisma",
+  ],
+  "Tools & Infrastructure": [
+    "postgresql",
+    "firebase",
+    "nginx",
+    "vercel",
+    "docker",
+    "git",
+    "testinglibrary",
+    "jest",
+    "cypress",
+  ],
+  "Design & Collaboration": [
+    "jira",
+    "github",
+    "gitlab",
+    "androidstudio",
+    "sonarqube",
+    "figma",
+  ],
+};
 
 export const TechStack = () => {
   // Track which category is active (only one at a time)
   const [activeCategory, setActiveCategory] = useState<string>("Languages");
+  // Add a key state to force re-render of TechGravity
+  const [gravityKey, setGravityKey] = useState<number>(0);
   
   // Function to activate a category
   const handleCategoryClick = (category: string) => {
     setActiveCategory(category);
+    // Increment the key to force re-render of TechGravity
+    setGravityKey(prev => prev + 1);
   };
 
   return (
@@ -95,7 +138,10 @@ export const TechStack = () => {
             transition={{ duration: 1, delay: 0.6 }}
           >
             <div className="relative flex size-full items-center justify-center overflow-hidden">
-              <TechGravity activeCategory={activeCategory} />
+              <TechGravity 
+                key={gravityKey} 
+                slugs={slugCategories[activeCategory as keyof typeof slugCategories]} 
+              />
             </div>
           </motion.div> 
           {/* Call to action or additional info */}
