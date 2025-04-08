@@ -5,6 +5,13 @@ import dynamic from 'next/dynamic';
 
 const TechGravity = dynamic(() => import('./tech-gravity'), { ssr: false });
 
+// Define tech item interface
+interface TechItem {
+  name: string;
+  color: string | null;
+  background: string | null;
+}
+
 // Define the skill categories
 const categories = [
   { key:1, name: "Languages", color: "from-blue-500/20 to-teal-500/20" },
@@ -14,42 +21,40 @@ const categories = [
 ];
 
 // Define slug categories
-const slugCategories = {
+const slugCategories: Record<string, TechItem[]> = {
   "Languages": [
-    "typescript",
-    "javascript",
-    "dart",
-    "html5",
-    "css3",
+    { name: "TypeScript", color: null, background: null },
+    { name: "JavaScript", color: null, background: null },
+    { name: "Dart", color: null, background: null },
+    { name: "HTML5", color: null, background: null },
+    { name: "CSS3", color: null, background: null },
   ],
   "Frameworks": [
-    "react",
-    "flutter",
-    "android",
-    "nodedotjs",
-    "express",
-    "nextdotjs",
-    "prisma",
+    { name: "React", color: null, background: null },
+    { name: "Flutter", color: null, background: null },
+    { name: "Android", color: null, background: null },
+    { name: "Node.js", color: null, background: null },
+    { name: "Express", color: null, background: null },
+    { name: "Next.js", color: null, background: null },
+    { name: "Prisma", color: null, background: null },
   ],
   "Tools & Infrastructure": [
-    "postgresql",
-    "firebase",
-    "nginx",
-    "vercel",
-    "docker",
-    "git",
-    "testinglibrary",
-    "jest",
-    "cypress",
+    { name: "PostgreSQL", color: null, background: null },
+    { name: "Firebase", color: null, background: null },
+    { name: "NGINX", color: null, background: null },
+    { name: "Vercel", color: null, background: null },
+    { name: "Docker", color: null, background: null },
+    { name: "Git", color: null, background: null },
+    { name: "Jest", color: null, background: null },
+    { name: "Cypress", color: null, background: null },
   ],
   "Design & Collaboration": [
-    "jira",
-    "github",
-    "gitlab",
-    "androidstudio",
-    "sonarqube",
-    "figma",
-    "miro",
+    { name: "Jira", color: null, background: null },
+    { name: "GitHub", color: null, background: null },
+    { name: "GitLab", color: null, background: null },
+    { name: "SonarQube", color: null, background: null },
+    { name: "Figma", color: null, background: null },
+    { name: "Miro", color: null, background: "bg-[#ffdd33]" },
   ],
 };
 
@@ -104,7 +109,7 @@ export const TechStack = () => {
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             {categories.map((category, index) => (
               <motion.button
-                key={category.name}
+                key={category.key}
                 onClick={() => handleCategoryClick(category.name)}
                 disabled={activeCategory === category.name}
                 className={`px-5 py-3 rounded-full bg-gradient-to-r ${category.color} border ${
@@ -132,7 +137,7 @@ export const TechStack = () => {
 
           {/* Icon Cloud */}
           <motion.div 
-            className="h-[60vh] w-full my-10 relative bg-gradient-to-b from-transparent via-slate-900/30 to-transparent rounded-3xl overflow-hidden border border-slate-800"
+            className="h-[40vh] w-1/2 mx-auto my-10 relative bg-gradient-to-b from-transparent via-slate-900/30 to-transparent rounded-3xl overflow-hidden border border-teal-500/60 shadow-teal-500/40 shadow-lg"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -141,7 +146,7 @@ export const TechStack = () => {
             <div className="relative flex size-full items-center justify-center overflow-hidden">
               <TechGravity 
                 key={gravityKey} 
-                slugs={slugCategories[activeCategory as keyof typeof slugCategories]} 
+                slugs={slugCategories[activeCategory]} 
               />
             </div>
           </motion.div> 
