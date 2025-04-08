@@ -49,6 +49,7 @@ const slugCategories = {
     "androidstudio",
     "sonarqube",
     "figma",
+    "miro",
   ],
 };
 
