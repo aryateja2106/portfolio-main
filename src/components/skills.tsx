@@ -49,6 +49,7 @@ const slugCategories = {
     "androidstudio",
     "sonarqube",
     "figma",
+    "miro",
   ],
 };
 
@@ -61,7 +62,7 @@ export const TechStack = () => {
   // Function to activate a category
   const handleCategoryClick = (category: string) => {
     setActiveCategory(category);
-    // Increment the key to force re-render of TechGravity.
+    // Increment the key to force re-render of TechGravity
     setGravityKey(prev => prev + 1);
   };
 

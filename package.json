@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "portfolio",
+=======
+  "name": "portfolio-main",
+>>>>>>> 69e4e93404b086646fced14a28e796beabca1287
   "version": "0.1.0",
   "private": true,
   "scripts": {
