@@ -99,8 +99,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-Arya Teja Rudraraju - [LinkedIn](https://linkedin.com/in/arya-teja-rudraraju) - aryateja2106@gmail.com
-
-## Contact
-
 Arya Teja Rudraraju - [LinkedIn](https://linkedin.com/in/arya-teja-rudraraju) - [X/Twitter](https://x.com/r_aryateja) - aryateja2106@gmail.com
