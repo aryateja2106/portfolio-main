@@ -28,7 +28,7 @@ const projectsData: Project[] = [
     statusVariant: 'active', // Teal
     description: 'Building an AI research agent designed to assist users throughout their research paper reading journey, enhancing comprehension and discovery.',
     techStack: ['Next.js', 'Python', 'Langchain', 'VectorDB', 'Shadcn UI', 'AI/ML'],
-    githubLink: '#', // Replace with actual link
+    githubLink: 'https://github.com/LeSearch',
   },
   {
     id: 'mcp-servers',
@@ -37,7 +37,7 @@ const projectsData: Project[] = [
     statusVariant: 'active', // Teal
     description: 'Integrating and testing various Multi-Context Prompting (MCP) servers (like Windsurf, Cline) within custom AI IDEs and desktop applications.',
     techStack: ['Python', 'AI/ML', 'API Integration', 'Desktop Apps'],
-    githubLink: '#', // Replace with actual link
+    githubLink: 'https://github.com/aryateja2106/servers',
   },
   {
     id: 'openai-agents',
@@ -46,7 +46,7 @@ const projectsData: Project[] = [
     statusVariant: 'passive', // Amber
     description: 'Experimenting with the OpenAI Agents SDK to understand and build autonomous agent capabilities.',
     techStack: ['Python', 'OpenAI API', 'SDK', 'AI Agents'],
-    githubLink: '#', // Replace with actual link
+    githubLink: 'http://github.com/aryateja2106/meta-agent-OpenAI-Agents-SDK-',
   },
    {
     id: 'ai-inference',
@@ -55,7 +55,7 @@ const projectsData: Project[] = [
     statusVariant: 'forked', // Sky Blue
     description: 'Evaluating and testing different large language model inference libraries like vLLM and Nvidia TensorRT-LLM for performance and usability.',
     techStack: ['Python', 'vLLM', 'TensorRT-LLM', 'PyTorch', 'Docker'],
-    githubLink: '#', // Replace with actual link
+    githubLink: 'https://github.com/aryateja2106/Nvidia-dynamo',
   },
   {
     id: 'bolt-ollama',
@@ -64,7 +64,7 @@ const projectsData: Project[] = [
     statusVariant: 'forked', // Sky Blue
     description: 'Utilizing Bolt.new (a rapid app development tool) in conjunction with Ollama (for local model execution) to prototype small AI-powered applications.',
     techStack: ['Bolt.new', 'Ollama', 'Docker', 'AI/ML', 'Rapid Prototyping'],
-    githubLink: '#', // Replace with actual link
+    githubLink: 'https://github.com/aryateja2106/Bolt.new-ollama',
   },
   {
     id: 'phidata',
@@ -73,7 +73,7 @@ const projectsData: Project[] = [
     statusVariant: 'forked', // Sky Blue
     description: 'Exploring the Phidata framework to build AI agents equipped with long-term memory, contextual knowledge access, and function-calling abilities.',
     techStack: ['Python', 'Phidata', 'AI Agents', 'VectorDB', 'Function Calling'],
-    githubLink: '#', // Replace with actual link
+    githubLink: 'https://github.com/aryateja2106/phidata',
   },
   {
     id: 'vercel-chatbot',
@@ -82,8 +82,8 @@ const projectsData: Project[] = [
     statusVariant: 'showcase', // Teal (same as active)
     description: 'Developed and deployed a feature-rich chatbot application based on big-AGI, enabling professional-grade AI interactions with voice, personas, coding tools, and more.',
     techStack: ['Next.js', 'React', 'TypeScript', 'Vercel', 'AI/ML', 'Shadcn UI'],
-    githubLink: '#', // Replace with actual link
-    liveLink: '#', // Add live link if available
+    githubLink: 'https://github.com/aryateja2106',
+    liveLink: 'https://github.com/aryateja2106',
   },
   // Add more projects here...
 ];
@@ -192,7 +192,8 @@ interface AccordionItemProps { value: string; children: ReactNode; className?: s
 const AccordionItem: FC<AccordionItemProps> = ({ value, children, className = '' }) => ( <div className={`${className}`} data-value={value}>{children}</div> );
 interface AccordionTriggerProps { children: ReactNode; className?: string; onClick: () => void; isOpen: boolean; }
 const AccordionTrigger: FC<AccordionTriggerProps> = ({ children, className = '', onClick, isOpen }) => (
-    <button aria-hidden="true" type="button" aria-expanded={isOpen} className={`flex w-full items-center justify-between py-3 text-sm font-medium transition-all hover:text-neutral-100 text-neutral-400 ${className}`} onClick={onClick}>
+    // biome-ignore lint/a11y/noAriaHiddenOnFocusable: <explanation>
+<button aria-hidden="true" type="button" aria-expanded={isOpen} className={`flex w-full items-center justify-between py-3 text-sm font-medium transition-all hover:text-neutral-100 text-neutral-400 ${className}`} onClick={onClick}>
       {children}
       <motion.svg 
         xmlns="http://www.w3.org/2000/svg" 
@@ -443,7 +444,7 @@ export const Projects: FC = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
         >
           {hasMoreProjects && (
-            <Button variant="outline" size="lg" asChild href="https://github.com/your-username">
+            <Button variant="outline" size="lg" asChild href="https://github.com/aryateja2106">
               <span> Explore More on GitHub <ArrowRightIcon className="inline-block h-4 w-4 ml-2" /> </span>
             </Button>
           )}

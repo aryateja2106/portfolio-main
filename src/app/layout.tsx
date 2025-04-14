@@ -8,10 +8,10 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: {
-    default: "Arya Teja Rudraraju | AI Engineer & Automation Specialist",
+    default: "Arya Teja Rudraraju | AI Generalist & Automation Specialist",
     template: "%s • Arya Teja Rudraraju"
   },
-  description: "AI Engineer specializing in LLMs, generative AI, and automation solutions for business challenges",
+  description: "AI Generalist specializing in LLMs, generative AI, and automation solutions for business challenges",
   metadataBase: new URL('https://aryarudraraju.com'), // Replace with your actual domain when available
   applicationName: "Arya Teja Rudraraju's Portfolio",
   authors: [
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     index: true
   },
   openGraph: {
-    title: "Arya Teja Rudraraju | AI Engineer & Automation Specialist",
-    description: "AI Engineer specializing in LLMs, generative AI, and automation solutions for business challenges",
+    title: "Arya Teja Rudraraju | AI Generalist & Automation Specialist",
+    description: "AI Generalist specializing in LLMs, generative AI, and automation solutions for business challenges",
     siteName: "Arya Teja Rudraraju",
     type: 'website',
     url: '/',
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
     ]
   },
   twitter: {
-    title: "Arya Teja Rudraraju | AI Engineer & Automation Specialist",
-    description: "AI Engineer specializing in LLMs, generative AI, and automation solutions for business challenges",
+    title: "Arya Teja Rudraraju | AI Generalist & Automation Specialist",
+    description: "AI Generalist specializing in LLMs, generative AI, and automation solutions for business challenges",
     card: 'summary_large_image'
   }
 }
