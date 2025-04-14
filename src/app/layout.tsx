@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   category: 'Portfolio Website',
   keywords: [
     'AI Engineer',
+    'AI Generalist',
+    'AI Agent Specialist',
+    'Artificial Intelligence',
     'Machine Learning',
     'LLMs',
     'Generative AI',
@@ -43,7 +46,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: '/',
     emails: [
-      'aryateja2106@gmail.com'
+      'admin@aryateja.com'
     ]
   },
   twitter: {

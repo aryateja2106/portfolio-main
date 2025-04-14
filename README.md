@@ -6,11 +6,7 @@ A modern, interactive portfolio website built with Next.js 15, React 19, TypeScr
 
 ## Features
 
-<<<<<<< HEAD
 - **Modern Tech Stack**: Next.js 15, React 19, TypeScript, and Tailwind CSS
-=======
-- **Modern Tech Stack**: Next.js 15, React 19, TypeScript, and Tailwind CSS.
->>>>>>> 69e4e93404b086646fced14a28e796beabca1287
 - **Interactive UI Elements**: 
   - Binary animation that follows cursor movements
   - Typewriter text effect
@@ -103,8 +99,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-<<<<<<< HEAD
-Arya Teja Rudraraju - [LinkedIn](https://linkedin.com/in/arya-teja-rudraraju) - aryateja2106@gmail.com
-=======
-Arya Teja Rudraraju - [LinkedIn](https://linkedin.com/in/arya-teja-rudraraju) - [X/Twitter](https://x.com/r_aryateja) - aryateja2106@gmail.com
->>>>>>> 69e4e93404b086646fced14a28e796beabca1287
+Arya Teja Rudraraju - [LinkedIn](https://linkedin.com/in/arya-teja-rudraraju) - admin@aryateja.com
+
+Arya Teja Rudraraju - [LinkedIn](https://linkedin.com/in/arya-teja-rudraraju) - [X/Twitter](https://x.com/r_aryateja) - admin@aryateja.com

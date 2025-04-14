@@ -11,6 +11,7 @@ const BinaryCursor: React.FC<BinaryCursorOptions> = ({ element }) => {
   const particles = useRef<Particle[]>([]);
   const canvImages = useRef<HTMLCanvasElement[]>([]);
   const animationFrame = useRef<number | null>(null);
+  const isOverText = useRef<boolean>(false);
 
   const prefersReducedMotion = useRef<MediaQueryList | null>(null);
 
@@ -100,9 +101,45 @@ const BinaryCursor: React.FC<BinaryCursorOptions> = ({ element }) => {
       particles.current.push(new Particle(x, y, randomImage));
     };
 
+    // Check if cursor is over a text element
+    const isOverTextElement = (e: MouseEvent): boolean => {
+      const element = document.elementFromPoint(e.clientX, e.clientY);
+      if (!element) return false;
+      
+      // Check if element is a text-containing element
+      const isTextElement = (el: Element): boolean => {
+        const tagName = el.tagName.toLowerCase();
+        const textElements = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'a', 'button', 'li', 'td', 'th', 'label', 'input'];
+        
+        if (textElements.includes(tagName)) return true;
+        
+        // Check if element has visible text content
+        if (el.textContent && el.textContent.trim().length > 0) {
+          const style = window.getComputedStyle(el);
+          return style.cursor === 'pointer' || style.cursor === 'text';
+        }
+        
+        return false;
+      };
+      
+      // Check the element and its ancestors up to 2 levels
+      let currentEl: Element | null = element;
+      let depth = 0;
+      while (currentEl && depth < 2) {
+        if (isTextElement(currentEl)) return true;
+        currentEl = currentEl.parentElement;
+        depth++;
+      }
+      
+      return false;
+    };
+
     const onMouseMove = (e: MouseEvent) => {
+      // Check if cursor is over text and update ref
+      isOverText.current = isOverTextElement(e);
+      
       // Add particles at a controlled rate for mousemove
-       if (Math.random() > 0.3) return; // Only add particle ~30% of the time
+      if (isOverText.current || Math.random() > 0.3) return; // Don't add particles if over text
 
       const currentTarget = element || document.body; // Use consistent target
       const rect = currentTarget.getBoundingClientRect();
@@ -111,8 +148,11 @@ const BinaryCursor: React.FC<BinaryCursorOptions> = ({ element }) => {
       addParticleAtPosition(x, y);
     };
 
-    // --- NEW: Handler for click events ---
+    // --- Handler for click events ---
     const onClick = (e: MouseEvent) => {
+      // Don't add particles if over text
+      if (isOverText.current) return;
+      
       const currentTarget = element || document.body; // Use consistent target
       const rect = currentTarget.getBoundingClientRect();
       const x = element ? e.clientX - rect.left : e.clientX;

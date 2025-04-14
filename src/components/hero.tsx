@@ -47,8 +47,8 @@ export function Hero() {
   }
 
   return (
-    <div className="w-full px-4 md:max-w-4xl lg:px-0 pb-28 pt-20 m-auto space-y-28 overflow-hidden">
-    <div className="relative flex min-h-[85vh] w-full flex-col items-center md:justify-center py-8 px-4 md:px-0">
+    <div className="w-full px-4 md:max-w-4xl lg:px-0 pb-16 pt-20 m-auto overflow-hidden">
+    <div className="relative flex min-h-[90vh] w-full flex-col items-center md:justify-center py-8 px-4 md:px-0">
       {/* Background effects */}
       <div className="absolute -z-50 h-64 w-64 top-20 left-0 bg-[conic-gradient(transparent,rgb(0,0,0))] opacity-15 blur-2xl dark:bg-[conic-gradient(transparent,rgb(255,255,255))] md:left-36" />
       

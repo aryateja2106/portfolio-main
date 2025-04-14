@@ -14,7 +14,7 @@ export default function Page() {
     <div className="relative w-full">
       <Hero />
       {/* Main content container */}
-      <div className="w-full px-4 md:max-w-4xl lg:px-0 pb-28 pt-20 m-auto space-y-28 overflow-hidden">
+      <div className="w-full px-4 md:max-w-4xl lg:px-0 pb-28 pt-5 m-auto space-y-20 overflow-hidden">
         <About/>
         <Experience/>
         <TechStack/>
